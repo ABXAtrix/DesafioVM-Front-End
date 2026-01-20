@@ -1,0 +1,110 @@
+.login-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 360px;
+  padding: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px;
+  background-color: #e6e6e6;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #666;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: 2px solid #7b78ff;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.form-options a {
+  text-decoration: none;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.form-options a:hover {
+  color: #7b78ff;
+}
+
+/* Botão Roxo */
+.btn-login {
+  width: 100%;
+  padding: 16px;
+  margin-top: 25px;
+  background-color: #7b78ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #625fff;
+}
+
+.btn-login:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.register-link {
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.register-link a {
+  color: #7b78ff;
+  text-decoration: none;
+  font-weight: bold;
+}
