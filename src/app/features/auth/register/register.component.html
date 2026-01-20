@@ -1,0 +1,54 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Criar Conta</h2>
+
+    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+      <div class="input-group">
+        <input
+          type="text"
+          name="nome"
+          [(ngModel)]="usuario.nome"
+          required
+          placeholder="Nome completo"
+        />
+      </div>
+
+      <div class="input-group">
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="usuario.email"
+          required
+          email
+          placeholder="E-mail"
+        />
+      </div>
+
+      <div class="input-group">
+        <input
+          type="password"
+          name="senha"
+          [(ngModel)]="usuario.senha"
+          required
+          placeholder="Senha"
+        />
+      </div>
+
+      @if (errorMessage) {
+        <div class="error-msg">{{ errorMessage }}</div>
+      }
+
+      <button
+        type="submit"
+        class="btn-login"
+        [disabled]="registerForm.invalid || isLoading"
+      >
+        {{ isLoading ? "Cadastrando..." : "Finalizar Cadastro" }}
+      </button>
+
+      <p class="register-link">
+        Já tem uma conta? <a href="/login">Fazer Login</a>
+      </p>
+    </form>
+  </div>
+</div>
