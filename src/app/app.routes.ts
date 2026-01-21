@@ -7,7 +7,29 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   
+{ 
+    path: 'vms', 
+    canActivate: [authGuard], 
+    loadComponent: () => import('./features/vms/vm-list/vm-list.component').then(m => m.VmListComponent) 
+  },
+  
+  { 
+    path: 'vms', 
+    loadComponent: () => import('./features/vms/vm-list/vm-list.component').then(m => m.VmListComponent) 
+  },
+  { 
+    path: 'vms/novo', 
+    loadComponent: () => import('./features/vms/vm-form/vm-form.component').then(m => m.VmFormComponent) 
+  },
+  { 
+    path: 'vms/editar/:id', 
+    loadComponent: () => import('./features/vms/vm-form/vm-form.component').then(m => m.VmFormComponent) 
+  },
+  
+  { 
+    path: 'vms/:id', 
+    loadComponent: () => import('./features/vms/vm-form/vm-form.component').then(m => m.VmFormComponent) 
+  },
 
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'login' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

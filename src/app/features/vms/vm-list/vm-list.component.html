@@ -1,0 +1,99 @@
+<div class="dashboard-container">
+  <button class="btn-logout" (click)="logout()" title="Sair do Sistema">
+    Sair 🚪
+  </button>
+
+  <div class="header-actions">
+    <h1>Minhas Máquinas Virtuais</h1>
+    <button class="btn-primary" (click)="novaVm()">
+      <span>+</span> Nova Máquina
+    </button>
+  </div>
+
+  <div class="card">
+    @if (isLoading) {
+      <div class="loading-state">Carregando máquinas...</div>
+    } @else if (vms.length === 0) {
+      <div class="empty-state">
+        <p>Você ainda não possui máquinas virtuais cadastradas.</p>
+      </div>
+    } @else {
+      <table class="vm-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th class="text-center">Configuração</th>
+            <th class="text-center">Status</th>
+            <th class="text-center">Controle Rápido</th>
+            <th>Data de Criação</th>
+            <th class="text-right">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (vm of vms; track vm.id) {
+            <tr>
+              <td class="vm-name">{{ vm.nome }}</td>
+
+              <td class="text-center">
+                <span class="badge-info">{{ vm.cpu }} vCPU</span>
+                <span class="badge-info">{{ vm.memoria }} GB RAM</span>
+                <span class="badge-info">{{ vm.disco }} GB HD</span>
+              </td>
+
+              <td class="text-center">
+                <span [class]="'status-pill ' + vm.status.toLowerCase()">
+                  {{ vm.status }}
+                </span>
+              </td>
+
+              <td class="text-center">
+                <div class="status-quick-actions">
+                  <button
+                    class="btn-status start"
+                    [disabled]="vm.status === 'START'"
+                    (click)="alterarStatus(vm, 'START')"
+                  >
+                    START
+                  </button>
+                  <button
+                    class="btn-status stop"
+                    [disabled]="vm.status === 'STOP'"
+                    (click)="alterarStatus(vm, 'STOP')"
+                  >
+                    STOP
+                  </button>
+                  <button
+                    class="btn-status suspend"
+                    [disabled]="vm.status === 'SUSPEND'"
+                    (click)="alterarStatus(vm, 'SUSPEND')"
+                  >
+                    SUSPEND
+                  </button>
+                </div>
+              </td>
+
+              <td>{{ vm.dataCriacao | date: "dd/MM/yyyy HH:mm" }}</td>
+
+              <td class="text-right">
+                <button
+                  class="btn-icon edit"
+                  (click)="editar(vm.id!)"
+                  title="Editar"
+                >
+                  ✏️
+                </button>
+                <button
+                  class="btn-icon delete"
+                  (click)="excluir(vm.id!)"
+                  title="Excluir"
+                >
+                  🗑️
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>
