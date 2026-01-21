@@ -1,21 +1,28 @@
 <div class="dashboard-container">
-  <button class="btn-logout" (click)="logout()" title="Sair do Sistema">
-    Sair 🚪
-  </button>
-
   <div class="header-actions">
     <h1>Minhas Máquinas Virtuais</h1>
-    <button class="btn-primary" (click)="novaVm()">
+    <button
+      class="btn-primary"
+      (click)="novaVm()"
+      [disabled]="vms.length >= LIMITE_VMS"
+    >
       <span>+</span> Nova Máquina
     </button>
   </div>
 
   <div class="card">
     @if (isLoading) {
-      <div class="loading-state">Carregando máquinas...</div>
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Carregando máquinas...</p>
+      </div>
     } @else if (vms.length === 0) {
       <div class="empty-state">
+        <span class="icon">🖥️</span>
         <p>Você ainda não possui máquinas virtuais cadastradas.</p>
+        <button class="btn-secondary" (click)="novaVm()">
+          Criar primeira máquina
+        </button>
       </div>
     } @else {
       <table class="vm-table">
