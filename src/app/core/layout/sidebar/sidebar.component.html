@@ -1,0 +1,28 @@
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-container">
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/vms" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <span class="text">Máquinas Virtuais</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active">
+          <span class="text">Dashboards</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">
+    <button (click)="logout()" class="btn-logout-side">
+      <span class="icon">🚪</span>
+      <span class="text">Sair do Sistema</span>
+    </button>
+  </div>
+</nav>
