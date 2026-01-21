@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'; // Importação do ambiente
+import { environment } from '../../environments/environment';
 import { VirtualMachine } from '../core/models/virtual-machine.model';
 
 export interface ApiResponse<T> {
@@ -16,7 +16,6 @@ export interface ApiResponse<T> {
 export class VmService {
   private http = inject(HttpClient);
 
-  // URL centralizada vinda do environment
   private readonly API = `${environment.apiUrl}/vms`;
 
   /**
@@ -35,7 +34,6 @@ export class VmService {
 
   /**
    * Envia uma nova VM para o backend (Cadastro).
-   * O backend deve validar o limite de 5 máquinas conforme o desafio.
    */
   salvar(vm: VirtualMachine): Observable<ApiResponse<VirtualMachine>> {
     return this.http.post<ApiResponse<VirtualMachine>>(this.API, vm);
