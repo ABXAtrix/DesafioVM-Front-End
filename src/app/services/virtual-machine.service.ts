@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // Importação do ambiente
 import { VirtualMachine } from '../core/models/virtual-machine.model';
 
 export interface ApiResponse<T> {
@@ -14,34 +15,51 @@ export interface ApiResponse<T> {
 })
 export class VmService {
   private http = inject(HttpClient);
-  private readonly API = 'http://localhost:8080/desafio/api/vms';
 
-  // Retorna o envelope contendo a lista de VMs
+  // URL centralizada vinda do environment
+  private readonly API = `${environment.apiUrl}/vms`;
+
+  /**
+   * Retorna a lista de todas as VMs cadastradas.
+   */
   listar(): Observable<ApiResponse<VirtualMachine[]>> {
     return this.http.get<ApiResponse<VirtualMachine[]>>(this.API);
   }
 
-  // Retorna o envelope contendo uma única VM para edição
+  /**
+   * Busca os detalhes de uma VM específica pelo ID.
+   */
   buscarPorId(id: number): Observable<ApiResponse<VirtualMachine>> {
     return this.http.get<ApiResponse<VirtualMachine>>(`${this.API}/${id}`);
   }
 
-  // Envia a nova VM e recebe o objeto criado dentro do envelope
+  /**
+   * Envia uma nova VM para o backend (Cadastro).
+   * O backend deve validar o limite de 5 máquinas conforme o desafio.
+   */
   salvar(vm: VirtualMachine): Observable<ApiResponse<VirtualMachine>> {
     return this.http.post<ApiResponse<VirtualMachine>>(this.API, vm);
   }
 
-  // Atualiza a VM inteira. O backend geralmente retorna o objeto atualizado
+  /**
+   * Atualiza os dados de uma VM existente.
+   * O ID e a data de criação são preservados no backend.
+   */
   atualizar(id: number, vm: VirtualMachine): Observable<ApiResponse<VirtualMachine>> {
     return this.http.put<ApiResponse<VirtualMachine>>(`${this.API}/${id}`, vm);
   }
 
-  // Método de patch para alteração rápida de status
+  /**
+   * Altera o estado (status) de uma máquina virtual.
+   * Transições aceitas: START, STOP, SUSPEND.
+   */
   alterarStatus(id: number, novoStatus: string): Observable<ApiResponse<VirtualMachine>> {
     return this.http.patch<ApiResponse<VirtualMachine>>(`${this.API}/${id}/status`, { status: novoStatus });
   }
 
-  // Exclusão costuma retornar void ou uma mensagem de sucesso no envelope
+  /**
+   * Remove uma máquina virtual permanentemente.
+   */
   excluir(id: number): Observable<ApiResponse<void>> {
     return this.http.delete<ApiResponse<void>>(`${this.API}/${id}`);
   }

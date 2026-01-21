@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import { LoginDTO } from '../core/models/login.model';
 import { Usuario } from '../core/models/usuario.model';
 
@@ -12,16 +13,15 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  // URL API Spring Boot
-  private readonly API = 'http://localhost:8080/desafio/api/auth';
+  private readonly API = `${environment.apiUrl}/auth`;
 
   /**
-   * Realiza o login consumindo o AuthenticationController do Java.
+   * Realiza o login consumindo o AuthenticationController.
    */
   login(credentials: LoginDTO): Observable<any> {
     return this.http.post(`${this.API}/login`, credentials).pipe(
       tap((res: any) => {
-        // Armazena o token JWT e o e-mail no localStorage do navegador
+        // Armazena o token JWT e dados do usuário localmente
         localStorage.setItem('token', res.token);
         localStorage.setItem('user_email', res.email);
         localStorage.setItem('user_id', res.userId);
@@ -29,6 +29,9 @@ export class AuthService {
     );
   }
 
+  /**
+   * Registra um novo usuário no sistema.
+   */
   registrar(usuario: Usuario): Observable<any> {
     return this.http.post(`${this.API}/registrar`, usuario);
   }
@@ -41,7 +44,6 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  
   /**
    * Recupera o token salvo para uso no Interceptor.
    */
@@ -50,7 +52,7 @@ export class AuthService {
   }
 
   /**
-   * Verifica se existe um token para proteger as rotas.
+   * Verifica se existe um token para proteger as rotas do Angular 19.
    */
   estaLogado(): boolean {
     return !!this.getToken();
