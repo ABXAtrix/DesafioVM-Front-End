@@ -19,12 +19,11 @@ export class AuthService {
    * Realiza o login consumindo o AuthenticationController.
    */
   login(credentials: LoginDTO): Observable<any> {
-    return this.http.post(`${this.API}/login`, credentials).pipe(
-      tap((res: any) => {
-        // Armazena o token JWT e dados do usuário localmente
+    return this.http.post<any>(`${this.API}/obterToken`, credentials).pipe(
+      tap((res) => {
         localStorage.setItem('token', res.token);
-        localStorage.setItem('user_email', res.email);
-        localStorage.setItem('user_id', res.userId);
+        if (res.email) localStorage.setItem('user_email', res.email);
+        if (res.userId) localStorage.setItem('user_id', res.userId.toString());
       }),
     );
   }
