@@ -127,6 +127,16 @@
   display: block;
 }
 
+.validation-helper {
+  margin-top: 6px;
+}
+
+.text-danger {
+  color: #f1416c !important;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
 .helper-text {
   color: #b5b5c3;
   font-size: 12px;

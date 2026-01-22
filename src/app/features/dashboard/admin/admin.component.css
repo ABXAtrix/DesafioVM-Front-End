@@ -1,7 +1,7 @@
 .admin-container {
   padding: 30px 40px;
-  margin-left: 210px;
-  background: #f8f9fc;
+  margin-left: 0;
+  background: transparent;
   min-height: 100vh;
   transition: all 0.3s ease;
 }
