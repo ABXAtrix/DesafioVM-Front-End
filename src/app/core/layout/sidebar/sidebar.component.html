@@ -8,7 +8,7 @@
 
   <div class="menu-section">
     <div class="nav-group">
-      <span class="nav-label">Serviços</span>
+      <span class="nav-group-label">Serviços</span>
       <ul class="nav-links">
         <li>
           <a routerLink="/vms" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -25,7 +25,7 @@
 
     <div class="nav-group" *ngIf="isAdmin">
       <div class="nav-divider"></div>
-      <span class="nav-label admin">Administração</span>
+      <span class="nav-group-label admin-label">Administração</span>
       <ul class="nav-links">
         <li>
           <a routerLink="/admin" routerLinkActive="active">
@@ -37,6 +37,18 @@
   </div>
 
   <div class="sidebar-footer">
+    <div class="user-profile-box" *ngIf="usuarioLogado">
+      <div class="user-info-main">
+        <div class="avatar-wrapper">
+          <div class="user-avatar">{{ inicialNome }}</div>
+          <button class="btn-edit-small" (click)="irParaPerfil()" title="Editar Perfil">⚙️</button>
+        </div>
+        <div class="user-text">
+          <span class="u-name" [title]="usuarioLogado.nome">{{ usuarioLogado.nome }}</span>
+        </div>
+      </div>
+    </div>
+
     <button (click)="logout()" class="btn-logout-side">
       <span class="text">Sair do Sistema</span>
     </button>
