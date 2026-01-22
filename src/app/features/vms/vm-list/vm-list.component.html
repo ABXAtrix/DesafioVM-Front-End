@@ -1,13 +1,14 @@
 <div class="dashboard-container">
   <div class="header-actions">
     <h1>Minhas Máquinas Virtuais</h1>
-    <button
-      class="btn-primary"
-      (click)="novaVm()"
-      [disabled]="vms.length >= LIMITE_VMS"
-    >
-      <span>+</span> Nova Máquina
-    </button>
+    <div class="right-actions">
+      <button
+        class="btn-primary"
+        (click)="novaVm()"
+        [disabled]="vms.length >= LIMITE_VMS"
+      >
+        <span>+</span> Nova Máquina
+      </button> </div>
   </div>
 
   <div class="card">
@@ -102,5 +103,53 @@
         </tbody>
       </table>
     }
+  </div>
+</div>
+
+<div class="logs-section">
+  <div class="header-actions">
+    <h2>Histórico de Atividades (Logging)</h2>
+    <button class="btn-text" (click)="carregarLogs()">Atualizar Histórico</button>
+  </div>
+
+  <div class="card log-card">
+    <div class="log-container">
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Usuário</th>
+            <th>Ação</th>
+            <th>Máquina</th>
+            <th class="text-center">Resultado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (log of logs; track log.id) {
+            <tr class="log-row">
+              <td class="log-time">{{ log.dataHora | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+              
+              <td class="log-user"><strong>{{ log.usuario.email }}</strong></td>
+              
+              <td>
+                <span class="action-tag" [ngClass]="log.acao.toLowerCase()">
+                  {{ log.acao }}
+                </span>
+              </td>
+
+              <td class="log-vm">{{ log.nomeMaquina }}</td>
+              
+              <td class="text-center">
+                <span class="status-indicator success"></span> Sucesso
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="empty-logs">Nenhuma atividade registrada ainda.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
