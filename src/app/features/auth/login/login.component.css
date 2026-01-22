@@ -7,25 +7,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #f8f9fa; /* Cinza claro para destacar o card */
   overflow: hidden;
 }
 
 .login-container {
   width: 100%;
-  max-width: 360px;
-  padding: 20px;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra idêntica ao cadastro */
   text-align: center;
 }
 
 h2 {
   font-family: "Arial", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 900;
   color: #333;
   margin-bottom: 30px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .input-group {
@@ -35,44 +38,21 @@ h2 {
 .input-group input {
   width: 100%;
   padding: 16px;
-  background-color: #e6e6e6;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  color: #666;
+  background-color: #f2f2f2;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #333;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .input-group input:focus {
-  outline: 2px solid #7b78ff;
+  outline: none;
+  background-color: #fff;
+  border-color: #7b78ff;
 }
 
-.form-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
-  font-size: 0.75rem;
-  color: #999;
-}
-
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.form-options a {
-  text-decoration: none;
-  color: #999;
-  transition: color 0.2s;
-}
-
-.form-options a:hover {
-  color: #7b78ff;
-}
-
-/* Botão Roxo */
 .btn-login {
   width: 100%;
   padding: 16px;
@@ -80,16 +60,17 @@ h2 {
   background-color: #7b78ff;
   color: white;
   border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 0.8rem;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 1rem;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.btn-login:hover {
+.btn-login:hover:not(:disabled) {
   background-color: #625fff;
+  transform: translateY(-1px);
 }
 
 .btn-login:disabled {
@@ -98,13 +79,28 @@ h2 {
 }
 
 .register-link {
-  margin-top: 30px;
-  font-size: 0.8rem;
-  color: #666;
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: #888;
 }
 
 .register-link a {
   color: #7b78ff;
   text-decoration: none;
   font-weight: bold;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.error-msg {
+  background-color: #fff1f1;
+  color: #ff4d4d;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  border-left: 4px solid #ff4d4d;
+  text-align: left;
 }
