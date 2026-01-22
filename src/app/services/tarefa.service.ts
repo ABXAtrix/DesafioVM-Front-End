@@ -9,7 +9,7 @@ import { Tarefa } from '../core/models/tarefa.model';
 })
 export class TarefaService {
   private http = inject(HttpClient);
-  private readonly API = `${environment.apiUrl}/tarefas`;
+  private readonly API = `${environment.apiUrl}/desafio/api/tarefas`;
 
   /**
    * De acordo com o cargo do usuário, retorna a lista de tarefas de todos usuarios ou apenas do proprio.

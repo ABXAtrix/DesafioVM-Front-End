@@ -14,7 +14,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  private readonly API = `${environment.apiUrl}/auth`;
+  private readonly API = `${environment.apiUrl}/desafio/api/auth`;
 
   /**
    * Realiza o login consumindo o AuthenticationController.
