@@ -1,22 +1,39 @@
 <nav class="sidebar">
   <div class="sidebar-header">
     <div class="logo-container">
+      <div class="logo-icon">VM</div>
+      <span class="logo-text">Cloud Manager</span>
     </div>
   </div>
 
   <div class="menu-section">
-    <ul class="nav-links">
-      <li>
-        <a routerLink="/vms" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <span class="text">Máquinas Virtuais</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/dashboard" routerLinkActive="active">
-          <span class="text">Dashboards</span>
-        </a>
-      </li>
-    </ul>
+    <div class="nav-group">
+      <span class="nav-label">Serviços</span>
+      <ul class="nav-links">
+        <li>
+          <a routerLink="/vms" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <span class="text">Máquinas Virtuais</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active">
+            <span class="text">Dashboards</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-group" *ngIf="isAdmin">
+      <div class="nav-divider"></div>
+      <span class="nav-label admin">Administração</span>
+      <ul class="nav-links">
+        <li>
+          <a routerLink="/admin" routerLinkActive="active">
+            <span class="text">Gestão de Usuários</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="sidebar-footer">

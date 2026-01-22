@@ -53,10 +53,14 @@ export class VmListComponent implements OnInit {
 carregarLogs(): void {
   this.vmService.consultarLogs().subscribe({
     next: (res: any) => {
-      const logsRecebidos = res.dados || res; 
-      this.logs = logsRecebidos.sort((a: any, b: any) => 
-        new Date(b.dataHora).getTime() - new Date(a.dataHora).getTime()
-      );
+      const logsRecebidos = res.dados || res;
+      const emailLogado = this.authService.getUserEmail();
+
+      this.logs = logsRecebidos
+        .filter((log: Tarefa) => log.usuario?.email === emailLogado)
+        .sort((a: any, b: any) => 
+          new Date(b.dataHora).getTime() - new Date(a.dataHora).getTime()
+        );
     },
     error: (err) => console.error('Erro ao carregar logs', err)
   });

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service'; // Ajuste o caminho conforme seu projeto
 
 @Component({
   selector: 'app-sidebar',
@@ -11,10 +12,13 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class SidebarComponent {
   private router = inject(Router);
+  private authService = inject(AuthService);
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
 
   logout(): void {
-    localStorage.clear();
-    sessionStorage.clear();
-    this.router.navigate(['/login']);
+    this.authService.logout();
   }
 }

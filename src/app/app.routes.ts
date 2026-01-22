@@ -3,6 +3,9 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { authGuard } from './core/guards/auth.guard';
 import { MainLayoutComponent } from './core/layout/main-layout/main-layout.component';
+import { inject } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 export const routes: Routes = [
   // Rotas Públicas (Sem Sidebar)
@@ -30,6 +33,18 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./features/dashboard/dashboard-page/dashboard-page.component').then(m => m.DashboardPageComponent)
+      },
+      {
+        path: 'admin',
+        loadComponent: () => import('./features/dashboard/admin/admin.component').then(m => m.AdminComponent),
+        canMatch: [() => {
+          const isAdmin = inject(AuthService).isAdmin();
+          if (!isAdmin) {
+            inject(Router).navigate(['/vms']);
+            return false;
+          }
+          return true;
+        }]
       },
       { path: '', redirectTo: 'vms', pathMatch: 'full' }
     ]
