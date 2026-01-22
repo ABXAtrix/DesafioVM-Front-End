@@ -9,7 +9,8 @@
           name="email"
           [(ngModel)]="credentials.email"
           required
-          placeholder="Email"
+          email
+          placeholder="E-mail"
         />
       </div>
 
@@ -19,12 +20,20 @@
           name="senha"
           [(ngModel)]="credentials.senha"
           required
-          placeholder="Password"
+          placeholder="Senha"
         />
       </div>
 
-      <button type="submit" class="btn-login" [disabled]="loginForm.invalid">
-        Login
+      @if (errorMessage) {
+        <div class="error-msg">{{ errorMessage }}</div>
+      }
+
+      <button 
+        type="submit" 
+        class="btn-login" 
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        {{ isLoading ? "Entrando..." : "Login" }}
       </button>
 
       <p class="register-link">
