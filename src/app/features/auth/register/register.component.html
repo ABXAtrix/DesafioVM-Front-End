@@ -34,6 +34,21 @@
         />
       </div>
 
+      <div class="input-group select-wrapper">
+        <label for="cargo">Selecione o seu cargo</label>
+        <select
+          id="cargo"
+          name="cargo"
+          [(ngModel)]="usuario.cargo"
+          required
+          class="select-cargo"
+        >
+          @for (cargo of listaCargos; track cargo) {
+            <option [value]="cargo">{{ cargo }}</option>
+          }
+        </select>
+      </div>
+
       @if (errorMessage) {
         <div class="error-msg">{{ errorMessage }}</div>
       }
@@ -47,7 +62,7 @@
       </button>
 
       <p class="register-link">
-        Já tem uma conta? <a href="/login">Fazer Login</a>
+        Já tem uma conta? <a routerLink="/login">Fazer Login</a>
       </p>
     </form>
   </div>

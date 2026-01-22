@@ -7,66 +7,118 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #f8f9fa; /* Um cinza bem claro para destacar o card */
   overflow: hidden;
 }
 
 .login-container {
   width: 100%;
-  max-width: 360px;
-  padding: 20px;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra suave */
   text-align: center;
 }
 
 h2 {
   font-family: "Arial", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 900;
   color: #333;
   margin-bottom: 30px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .input-group {
   margin-bottom: 15px;
+  text-align: left;
 }
 
 .input-group input {
   width: 100%;
   padding: 16px;
   background-color: #f2f2f2;
-  border: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 0.95rem;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .input-group input:focus {
-  outline: 2px solid #7b78ff;
+  outline: none;
+  background-color: #fff;
+  border-color: #7b78ff;
+}
+
+.select-wrapper {
+  margin-top: 20px;
+}
+
+.select-wrapper label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #777;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.select-cargo {
+  width: 100%;
+  padding: 16px;
+  background-color: #f2f2f2;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #333;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%237b78ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.select-cargo:focus {
+  outline: none;
+  background-color: #fff;
+  border-color: #7b78ff;
 }
 
 .btn-login {
   width: 100%;
   padding: 16px;
-  margin-top: 20px;
+  margin-top: 25px;
   background-color: #7b78ff;
   color: white;
   border: none;
-  border-radius: 4px;
-  font-weight: bold;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 1rem;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-login:hover:not(:disabled) {
+  background-color: #5e5be6;
+  transform: translateY(-1px);
 }
 
 .btn-login:disabled {
   background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .register-link {
   margin-top: 25px;
-  font-size: 0.8rem;
-  color: #999;
+  font-size: 0.9rem;
+  color: #888;
 }
 
 .register-link a {
@@ -75,8 +127,16 @@ h2 {
   font-weight: bold;
 }
 
+.register-link a:hover {
+  text-decoration: underline;
+}
+
 .error-msg {
+  background-color: #fff1f1;
   color: #ff4d4d;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  border-left: 4px solid #ff4d4d;
 }

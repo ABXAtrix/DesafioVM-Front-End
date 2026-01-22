@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { jwtDecode } from "jwt-decode";
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
@@ -24,9 +25,28 @@ export class AuthService {
         localStorage.setItem('token', res.token);
         if (res.email) localStorage.setItem('user_email', res.email);
         if (res.userId) localStorage.setItem('user_id', res.userId.toString());
+        if (res.cargo) localStorage.setItem('user_cargo', res.cargo);
       }),
     );
   }
+
+  decodeToken(token: string) {
+  const decoded: any = jwtDecode(token);
+  console.log(decoded.cargo);
+  return decoded;
+}
+
+  /**
+   * Retorna o cargo do usuário para verificações de permissão.
+   */
+  getRole(): string | null {
+    return localStorage.getItem('user_cargo');
+  }
+
+  // Método utilitário para verificar se é Admin
+  isAdmin(): boolean {
+  return this.getRole() === 'ADMIN';
+}
 
   /**
    * Registra um novo usuário no sistema.

@@ -22,6 +22,13 @@ export class VmService {
   private readonly API = `${environment.apiUrl}/vms`;
 
   /**
+   * Lista TODAS as máquinas de TODOS os usuários (Visão Admin).
+   */
+  listarTodasDoSistema(): Observable<ApiResponse<VirtualMachine[]>> {
+    return this.http.get<ApiResponse<VirtualMachine[]>>(`${this.API}/all`);
+  }
+
+  /**
    * Retorna a lista de todas as VMs cadastradas.
    */
   listar(): Observable<ApiResponse<VirtualMachine[]>> {
