@@ -8,7 +8,8 @@
         [disabled]="vms.length >= LIMITE_VMS"
       >
         <span>+</span> Nova Máquina
-      </button> </div>
+      </button>
+    </div>
   </div>
 
   <div class="card">
@@ -18,12 +19,14 @@
         <p>Carregando máquinas...</p>
       </div>
     } @else if (vms.length === 0) {
-      <div class="empty-state">
-        <span class="icon">🖥️</span>
-        <p>Você ainda não possui máquinas virtuais cadastradas.</p>
-        <button class="btn-secondary" (click)="novaVm()">
-          Criar primeira máquina
-        </button>
+      <div class="empty-state-container">
+        <div class="empty-state-content">
+          <h3>Nenhuma VM encontrada</h3>
+          <p>Você ainda não possui máquinas virtuais cadastradas.</p>
+          <button class="btn-primary" (click)="novaVm()">
+            Criar minha primeira máquina
+          </button>
+        </div>
       </div>
     } @else {
       <table class="vm-table">
@@ -107,11 +110,6 @@
 </div>
 
 <div class="logs-section">
-  <div class="header-actions">
-    <h2>Histórico de Atividades (Logging)</h2>
-    <button class="btn-text" (click)="carregarLogs()">Atualizar Histórico</button>
-  </div>
-
   <div class="card log-card">
     <div class="log-container">
       <table class="log-table">
@@ -127,10 +125,14 @@
         <tbody>
           @for (log of logs; track log.id) {
             <tr class="log-row">
-              <td class="log-time">{{ log.dataHora | date: "dd/MM/yyyy HH:mm:ss" }}</td>
-              
-              <td class="log-user"><strong>{{ log.usuario.nome }}</strong></td>
-              
+              <td class="log-time">
+                {{ log.dataHora | date: "dd/MM/yyyy HH:mm:ss" }}
+              </td>
+
+              <td class="log-user">
+                <strong>{{ log.usuario.nome }}</strong>
+              </td>
+
               <td>
                 <span class="action-tag" [ngClass]="log.acao.toLowerCase()">
                   {{ log.acao }}
@@ -138,14 +140,20 @@
               </td>
 
               <td class="log-vm">{{ log.nomeMaquina }}</td>
-              
+
               <td class="text-center">
                 <span class="status-indicator success"></span> Sucesso
               </td>
             </tr>
           } @empty {
             <tr>
-              <td colspan="5" class="empty-logs">Nenhuma atividade registrada ainda.</td>
+              <td colspan="5" class="empty-logs">
+                <div
+                  style="display: flex; flex-direction: column; align-items: center; gap: 10px;"
+                >
+                  Nenhuma atividade registrada ainda.
+                </div>
+              </td>
             </tr>
           }
         </tbody>

@@ -9,35 +9,92 @@
       {{ mensagem.texto }}
     </div>
 
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="onSubmit()"
+      class="profile-form"
+    >
       <div class="form-section">
         <div class="input-group">
           <label>Nome Completo</label>
-          <input type="text" formControlName="nome" placeholder="Ex: Aurora Beatriz Macedo">
-          <span class="error-text" *ngIf="profileForm.get('nome')?.invalid && profileForm.get('nome')?.touched">
-            O nome é obrigatório.
-          </span>
+          <input
+            type="text"
+            formControlName="nome"
+            placeholder="Ex: Seu nome Sobrenome"
+          />
+
+          <div class="validation-helper">
+            <small
+              class="helper-text"
+              [class.text-danger]="
+                profileForm.get('nome')?.invalid &&
+                profileForm.get('nome')?.dirty
+              "
+            >
+              O nome deve ter no mínimo 3 letras.
+            </small>
+          </div>
         </div>
 
         <div class="input-group">
           <label>E-mail Institucional</label>
-          <input type="email" formControlName="email" placeholder="seuemail@exemplo.com">
-          <span class="error-text" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
-            E-mail inválido.
-          </span>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="seuemail@exemplo.com"
+          />
+
+          <div class="validation-helper">
+            <small
+              class="helper-text text-danger"
+              *ngIf="
+                profileForm.get('email')?.invalid &&
+                (profileForm.get('email')?.dirty ||
+                  profileForm.get('email')?.touched)
+              "
+            >
+              <span *ngIf="profileForm.get('email')?.errors?.['required']"
+                >O e-mail é obrigatório.</span
+              >
+              <span *ngIf="profileForm.get('email')?.errors?.['email']"
+                >Formato de e-mail inválido.</span
+              >
+            </small>
+          </div>
         </div>
 
         <div class="input-group">
           <label>Nova Senha</label>
-          <input type="password" formControlName="senha" placeholder="Deixe vazio para não alterar">
-          <small class="helper-text">Mínimo de 6 caracteres se for alterada.</small>
+          <input
+            type="password"
+            formControlName="senha"
+            placeholder="Deixe vazio para não alterar"
+          />
+
+          <div class="validation-helper">
+            <small
+              class="helper-text"
+              [class.text-danger]="
+                profileForm.get('senha')?.invalid &&
+                profileForm.get('senha')?.value
+              "
+            >
+              A senha deve ter no mínimo 6 caracteres se for alterada.
+            </small>
+          </div>
         </div>
       </div>
 
       <div class="form-footer">
-        <button type="button" class="btn-cancel" (click)="voltar()">Cancelar</button>
-        <button type="submit" class="btn-save" [disabled]="profileForm.invalid || loading">
-          {{ loading ? 'Salvando...' : 'Salvar Alterações' }}
+        <button type="button" class="btn-cancel" (click)="voltar()">
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn-save"
+          [disabled]="profileForm.invalid || loading"
+        >
+          {{ loading ? "Salvando..." : "Salvar Alterações" }}
         </button>
       </div>
     </form>
