@@ -19,7 +19,7 @@ export class VmService {
   private http = inject(HttpClient);
   private tarefaService = inject(TarefaService);
 
-  private readonly API = `${environment.apiUrl}/vms`;
+  private readonly API = `${environment.apiUrl}/desafio/api/vms`;
 
   /**
    * Lista TODAS as máquinas de TODOS os usuários (Visão Admin).
