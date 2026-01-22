@@ -117,7 +117,7 @@
       <table class="log-table">
         <thead>
           <tr>
-            <th>Timestamp</th>
+            <th>Hora de Atividade</th>
             <th>Usuário</th>
             <th>Ação</th>
             <th>Máquina</th>
@@ -129,7 +129,7 @@
             <tr class="log-row">
               <td class="log-time">{{ log.dataHora | date: "dd/MM/yyyy HH:mm:ss" }}</td>
               
-              <td class="log-user"><strong>{{ log.usuario.email }}</strong></td>
+              <td class="log-user"><strong>{{ log.usuario.nome }}</strong></td>
               
               <td>
                 <span class="action-tag" [ngClass]="log.acao.toLowerCase()">

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
@@ -23,18 +23,25 @@ export class AuthService {
     return this.http.post<any>(`${this.API}/obterToken`, credentials).pipe(
       tap((res) => {
         localStorage.setItem('token', res.token);
-        if (res.email) localStorage.setItem('user_email', res.email);
+        const decoded: any = this.decodeToken(res.token);
+
+        if (decoded.cargo) {
+          localStorage.setItem('user_cargo', decoded.cargo);
+        }
+
+        const email = res.email || decoded.sub;
+        if (email) localStorage.setItem('user_email', email);
+
         if (res.userId) localStorage.setItem('user_id', res.userId.toString());
-        if (res.cargo) localStorage.setItem('user_cargo', res.cargo);
       }),
     );
   }
 
   decodeToken(token: string) {
-  const decoded: any = jwtDecode(token);
-  console.log(decoded.cargo);
-  return decoded;
-}
+    const decoded: any = jwtDecode(token);
+    console.log(decoded.cargo);
+    return decoded;
+  }
 
   /**
    * Retorna o cargo do usuário para verificações de permissão.
@@ -45,8 +52,8 @@ export class AuthService {
 
   // Método utilitário para verificar se é Admin
   isAdmin(): boolean {
-  return this.getRole() === 'ADMIN';
-}
+    return this.getRole() === 'ADMIN';
+  }
 
   /**
    * Registra um novo usuário no sistema.
@@ -64,6 +71,13 @@ export class AuthService {
   }
 
   /**
+   * Busca os dados do usuário logado
+   */
+getUsuarioAtual(): Observable<any> {
+  return this.http.get<any>(`${this.API}/me`);
+}
+
+  /**
    * Recupera o token salvo para uso no Interceptor.
    */
   getToken(): string | null {
@@ -75,5 +89,12 @@ export class AuthService {
    */
   estaLogado(): boolean {
     return !!this.getToken();
+  }
+
+  /**
+   * Pega o email do usuario logado.
+   */
+  getUserEmail(): string | null {
+    return localStorage.getItem('user_email');
   }
 }
