@@ -46,10 +46,16 @@ export const routes: Routes = [
           return true;
         }]
       },
+      {
+        path: 'perfil',
+        loadComponent: () => import('./features/profile/profile-form.component').then(m => m.ProfileFormComponent)
+      },
+      
+      // Redirecionamento padrão dentro do layout
       { path: '', redirectTo: 'vms', pathMatch: 'full' }
     ]
   },
 
-  // Fallback
+  // Fallback (Página não encontrada ou rota inválida)
   { path: '**', redirectTo: 'login' }
 ];
