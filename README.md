@@ -1,32 +1,188 @@
-<<<<<<< HEAD
-# DesafioVM
+# Cloud Manager — Frontend (Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Aplicação **frontend** desenvolvida em **Angular**, responsável pela interface visual do sistema **Cloud Manager**, permitindo o gerenciamento de **Máquinas Virtuais (VMs)** de forma intuitiva, segura e interativa.
 
-## Development server
+Este projeto faz parte de um **desafio técnico (nível júnior)** e consome a **Cloud Manager API (Backend)** via requisições HTTP.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## Visão Geral
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+O **Cloud Manager Frontend** fornece uma experiência rica ao usuário, oferecendo:
 
-## Build
+- Autenticação segura com JWT
+- Dashboard interativo e dinâmico
+- Listagem, cadastro e gerenciamento de VMs
+- Filtros e paginação de dados
+- Monitoramento de tarefas executadas
+- Interface moderna e responsiva
+- Integração completa com a API REST
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## Arquitetura do Frontend
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A aplicação segue uma separação clara de responsabilidades:
 
-## Running end-to-end tests
+- **Modules**: Organização por domínio
+- **Components**: Camada de visualização
+- **Services**: Comunicação com a API e regras de negócio
+- **Guards**: Proteção de rotas autenticadas
+- **Interceptors**: Inclusão automática do token JWT nas requisições
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## Segurança e Autenticação
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-=======
-# DesafioVM-Front-End
-Desafio de Criar uma API que cadastra VMs, Front-End
->>>>>>> 5d8240565dac17579bafedd24f5c7c033ca55753
+- Autenticação baseada em **JWT**
+- Token armazenado de forma segura no cliente
+- Rotas protegidas por **AuthGuard**
+- Interceptor HTTP para envio automático do token
+
+---
+
+## Tecnologias Utilizadas
+
+- | Tecnologia | Descrição |
+- | **Angular** | Framework principal do frontend |
+- | **TypeScript** | Linguagem base |
+- | **Angular Router** | Controle de rotas |
+- | **HttpClient** | Comunicação com a API |
+- | **JWT** | Autenticação via token |
+- | **CSS** | Estilização da aplicação |
+
+---
+
+## Instalação e Execução
+
+### Pré-requisitos
+
+- Node.js (versão LTS)
+- Angular CLI
+- Backend em execução (Cloud Manager API)
+
+### Instalação das Dependências
+
+```
+npm install
+```
+
+---
+
+## Configuração do Ambiente
+
+Configure o arquivo de ambiente:
+```
+// src/environments/environment.ts
+
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:sua_url_backend'
+};
+```
+---
+## Executar a Aplicação
+
+```
+ng serve
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:url_front_end
+```
+---
+## Funcionalidades Implementadas
+- Autenticação
+
+- Login de usuário
+
+- Logout
+
+- Persistência de sessão via JWT
+
+- Redirecionamento automático para rotas protegidas
+
+
+### Dashboard
+
+- Visualização geral das máquinas virtuais
+
+- Indicadores de status das VMs
+
+- Atualização dinâmica dos dados
+
+### Máquinas Virtuais
+
+- Listagem de VMs do usuário
+
+- Cadastro de novas VMs
+
+- Atualização de dados
+
+- Remoção de VMs
+
+- Controle de estados:
+
+- START
+
+- STOP
+
+- SUSPEND
+
+- Paginação e filtros
+
+### Usuários
+
+- Visualização e edição do próprio perfil
+
+- Validação de campos (e-mail, limites, etc.)
+
+
+### Auditoria e Tarefas
+
+- Visualização do histórico de tarefas executadas
+
+- Monitoramento de ações realizadas nas VMs
+
+---
+
+## Integração com o Backend
+
+A aplicação consome a Cloud Manager API, utilizando os endpoints documentados no backend para:
+
+- Autenticação
+
+- Gerenciamento de VMs
+
+- Gerenciamento de usuários
+
+- Consulta de tarefas e auditoria
+---
+
+## Requisitos Implementados
+
+- Interface responsiva e intuitiva
+
+- Dashboard interativo e dinâmico
+
+- Comunicação segura com API REST
+
+- Autenticação via JWT
+
+- Proteção de rotas
+
+- Separação de cargos
+
+- Filtros e paginação
+
+- Separação de responsabilidades no frontend
+
+- Tratamento de erros e feedback ao usuário
+
+---
+
+# Escopo do Projeto
+
+Este repositório contempla exclusivamente o frontend da aplicação, desenvolvido em Angular, conforme especificado no desafio técnico.
