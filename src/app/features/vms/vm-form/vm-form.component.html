@@ -1,0 +1,78 @@
+<div class="form-container">
+  <div class="form-card">
+    <h2>{{ isEdit ? "Editar" : "Nova" }} Máquina Virtual</h2>
+
+    <p class="subtitle">Preencha as configurações de hardware da sua VM.</p>
+
+    @if (errorMessage) {
+      <div class="error-banner">{{ errorMessage }}</div>
+    }
+
+    <form (ngSubmit)="salvar()" #vmForm="ngForm">
+      <div class="input-group">
+        <label>Nome da Máquina</label>
+        <input
+          type="text"
+          name="nome"
+          [(ngModel)]="vm.nome"
+          required
+          placeholder="Ex: Servidor de Produção"
+        />
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>vCPUs</label>
+          <input
+            type="number"
+            name="cpu"
+            [(ngModel)]="vm.cpu"
+            required
+            min="1"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>RAM (GB)</label>
+          <input
+            type="number"
+            name="memoria"
+            [(ngModel)]="vm.memoria"
+            required
+            min="1"
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Disco SSD (GB)</label>
+        <input
+          type="number"
+          name="disco"
+          [(ngModel)]="vm.disco"
+          required
+          min="10"
+        />
+      </div>
+
+      <div class="field">
+        <label>Status Inicial</label>
+        <select name="status" [(ngModel)]="vm.status" required>
+          <option [value]="undefined" disabled>Selecione um status</option>
+          <option value="START">START</option>
+          <option value="STOP">STOP</option>
+          <option value="SUSPEND">SUSPEND</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-cancel" (click)="cancelar()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save" [disabled]="vmForm.invalid">
+          {{ isEdit ? "Salvar Alterações" : "Criar Máquina" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

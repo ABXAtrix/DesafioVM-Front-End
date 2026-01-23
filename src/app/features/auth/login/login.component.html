@@ -1,0 +1,44 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Login</h2>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="input-group">
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="credentials.email"
+          required
+          email
+          placeholder="E-mail"
+        />
+      </div>
+
+      <div class="input-group">
+        <input
+          type="password"
+          name="senha"
+          [(ngModel)]="credentials.senha"
+          required
+          placeholder="Senha"
+        />
+      </div>
+
+      @if (errorMessage) {
+        <div class="error-msg">{{ errorMessage }}</div>
+      }
+
+      <button 
+        type="submit" 
+        class="btn-login" 
+        [disabled]="loginForm.invalid || isLoading"
+      >
+        {{ isLoading ? "Entrando..." : "Login" }}
+      </button>
+
+      <p class="register-link">
+        Não tem uma conta? <a routerLink="/register">Registre-se</a>
+      </p>
+    </form>
+  </div>
+</div>

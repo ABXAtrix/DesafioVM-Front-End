@@ -1,0 +1,103 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Criar Conta</h2>
+
+    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+      
+      <div class="input-group">
+        <input
+          type="text"
+          name="nome"
+          [(ngModel)]="usuario.nome"
+          #nome="ngModel"
+          required
+          minlength="3"
+          placeholder="Nome completo"
+          [class.input-error]="nome.invalid && nome.dirty"
+        />
+        <div class="validation-helper">
+          <small
+            class="helper-text"
+            [class.text-danger]="nome.invalid && nome.dirty"
+          >
+            O nome deve ter no mínimo 3 letras.
+          </small>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="usuario.email"
+          #email="ngModel"
+          required
+          email
+          placeholder="E-mail"
+          [class.input-error]="email.invalid && email.dirty"
+        />
+        <div class="validation-helper">
+          <small
+            class="helper-text text-danger"
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+          >
+            <span *ngIf="email.errors?.['required']">O e-mail é obrigatório.</span>
+            <span *ngIf="email.errors?.['email']">Formato de e-mail inválido.</span>
+          </small>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input
+          type="password"
+          name="senha"
+          [(ngModel)]="usuario.senha"
+          #senha="ngModel"
+          required
+          minlength="6"
+          placeholder="Senha (mín. 6 caracteres)"
+          [class.input-error]="senha.invalid && senha.dirty"
+        />
+        <div class="validation-helper">
+          <small
+            class="helper-text"
+            [class.text-danger]="senha.invalid && senha.dirty"
+          >
+            A senha deve ter no mínimo 6 caracteres.
+          </small>
+        </div>
+      </div>
+
+      <div class="input-group select-wrapper">
+        <label for="cargo">Selecione o seu cargo</label>
+        <select
+          id="cargo"
+          name="cargo"
+          [(ngModel)]="usuario.cargo"
+          required
+          class="select-cargo"
+        >
+          @for (cargo of listaCargos; track cargo) {
+            <option [value]="cargo">{{ cargo }}</option>
+          }
+        </select>
+      </div>
+
+      @if (errorMessage) {
+        <div class="error-msg">{{ errorMessage }}</div>
+      }
+
+      <button
+        type="submit"
+        class="btn-login"
+        [disabled]="registerForm.invalid || isLoading"
+      >
+        {{ isLoading ? "Cadastrando..." : "Finalizar Cadastro" }}
+      </button>
+
+      <p class="register-link">
+        Já tem uma conta? <a routerLink="/login">Fazer Login</a>
+      </p>
+    </form>
+  </div>
+</div>

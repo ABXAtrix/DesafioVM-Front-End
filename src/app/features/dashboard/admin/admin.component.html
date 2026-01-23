@@ -1,0 +1,80 @@
+<div class="admin-container">
+  <header class="admin-header">
+    <h1>Painel Administrativo</h1>
+    <p>Gerencie usuários e monitore atividades do sistema.</p>
+  </header>
+
+  <div class="admin-grid">
+    <section class="admin-card">
+      <div class="card-header">
+        <h2>Usuários Cadastrados</h2>
+        <span class="count-badge">{{ usuarios.length }} usuários</span>
+      </div>
+      <div class="table-scroll-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Cargo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of usuarios">
+              <td>#{{ user.id }}</td>
+              <td class="user-name-cell">{{ user.nome }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="badge" [ngClass]="user.cargo">{{
+                  user.cargo
+                }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <div class="card-header">
+        <h2>Histórico Geral de Atividades</h2>
+        <button class="btn-refresh" (click)="carregarDados()">Atualizar</button>
+      </div>
+
+      <div class="log-scroll-container">
+        <div class="log-list">
+          <div *ngFor="let log of logs" class="log-item">
+            <div class="log-info">
+              <div class="log-top">
+                <span class="log-user-name">{{
+                  log.usuario?.nome || "Sistema"
+                }}</span>
+                <span class="log-user-email">{{ log.usuario?.email }}</span>
+              </div>
+              <span class="log-action-text">
+                Realizou <strong>{{ log.acao }}</strong> na VM
+                <span class="vm-tag">{{ log.nomeMaquina }}</span>
+              </span>
+            </div>
+            <div class="log-right">
+              <div class="log-meta-info">
+                <span class="log-date">{{
+                  log.dataHora | date: "dd/MM/yyyy"
+                }}</span>
+                <span class="log-hour">{{
+                  log.dataHora | date: "HH:mm:ss"
+                }}</span>
+              </div>
+              <span class="status-indicator-dot success"></span>
+            </div>
+          </div>
+
+          <div *ngIf="logs.length === 0" class="empty-state-logs">
+            <p>Nenhuma atividade registrada no sistema.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

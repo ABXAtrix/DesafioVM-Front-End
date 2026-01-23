@@ -1,0 +1,54 @@
+<div class="dashboard-wrapper">
+  <div class="header-area">
+    <h1>Painel de Monitoramento</h1>
+    <p>Visão geral da sua infraestrutura virtual</p>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon total">🖥️</div>
+      <div class="kpi-content">
+        <span class="label">Total de VMs</span>
+        <h2 class="value">{{ totalVms }} <small>/ {{ LIMITE_VMS }}</small></h2>
+      </div>
+    </div>
+    
+    <div class="kpi-card">
+      <div class="kpi-icon running">⚡</div>
+      <div class="kpi-content">
+        <span class="label">Em Execução</span>
+        <h2 class="value text-success">{{ vmsAtivas }}</h2>
+      </div>
+    </div>
+
+    <div class="kpi-card">
+      <div class="kpi-icon alerts">⚠️</div>
+      <div class="kpi-content">
+        <span class="label">Paradas/Suspensas</span>
+        <h2 class="value text-warning">{{ vmsInterrompidas }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-layout">
+    <div class="chart-box">
+      <div class="chart-header">
+        <h3>Status Operacional</h3>
+        <span class="subtitle">Distribuição atual por estado</span>
+      </div>
+      <div class="canvas-container">
+        <canvas id="statusChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-header">
+        <h3>Capacidade de Alocação</h3>
+        <span class="subtitle">Limite de {{ LIMITE_VMS }} máquinas por conta</span>
+      </div>
+      <div class="canvas-container">
+        <canvas id="capacityChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <div class="logo-icon">VM</div>
+      <span class="logo-text">Cloud Manager</span>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <div class="nav-group">
+      <span class="nav-group-label">Serviços</span>
+      <ul class="nav-links">
+        <li>
+          <a routerLink="/vms" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <span class="text">Máquinas Virtuais</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active">
+            <span class="text">Dashboards</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-group" *ngIf="isAdmin">
+      <div class="nav-divider"></div>
+      <span class="nav-group-label admin-label">Administração</span>
+      <ul class="nav-links">
+        <li>
+          <a routerLink="/admin" routerLinkActive="active">
+            <span class="text">Gestão de Usuários</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="user-profile-box" *ngIf="usuarioLogado">
+      <div class="user-info-main">
+        <div class="avatar-wrapper">
+          <div class="user-avatar">{{ inicialNome }}</div>
+          <button class="btn-edit-small" (click)="irParaPerfil()" title="Editar Perfil">⚙️</button>
+        </div>
+        <div class="user-text">
+          <span class="u-name" [title]="usuarioLogado.nome">{{ usuarioLogado.nome }}</span>
+        </div>
+      </div>
+    </div>
+
+    <button (click)="logout()" class="btn-logout-side">
+      <span class="text">Sair do Sistema</span>
+    </button>
+  </div>
+</nav>

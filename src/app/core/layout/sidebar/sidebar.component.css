@@ -1,0 +1,226 @@
+:host {
+  --sidebar-bg: #1e1e2d;
+  --sidebar-active: #7b78ff;
+  --sidebar-hover: rgba(255, 255, 255, 0.08);
+  --text-muted: #d1d1e2;
+  --text-light: #ffffff;
+  --text-admin: #a2a0ff;
+  --danger: #f44336;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/*Header & Branding */
+.sidebar-header {
+  padding: 30px 24px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  background: var(--sidebar-active);
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.logo-text {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/*Seção de Menu e Navegação */
+.menu-section {
+  flex: 1;
+  padding: 0 16px;
+  overflow-y: auto;
+}
+
+.nav-group-label {
+  display: block;
+  color: #b5b5c3;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 25px 0 10px 12px;
+}
+
+.nav-group-label.admin-label {
+  color: var(--text-admin);
+  opacity: 1;
+}
+
+.nav-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 15px 12px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin-bottom: 8px;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  background: var(--sidebar-hover);
+  color: var(--text-light);
+}
+
+.nav-links a.active {
+  background: var(--sidebar-active);
+  color: var(--text-light);
+  box-shadow: 0 4px 15px rgba(123, 120, 255, 0.3);
+}
+
+/*Footer e Perfil do Usuário */
+.sidebar-footer {
+  padding: 20px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.user-profile-box {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.user-info-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--sidebar-active), #a2a0ff);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Botão de edição */
+.btn-edit-small {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  background: #2b2b40;
+  border: 1px solid var(--sidebar-active);
+  border-radius: 50%;
+  color: white;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.btn-edit-small:hover {
+  transform: scale(1.15) rotate(45deg);
+  background: var(--sidebar-active);
+  box-shadow: 0 0 8px rgba(123, 120, 255, 0.5);
+}
+
+.user-text {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.u-name {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/*Botão de Logout */
+.btn-logout-side {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(244, 67, 54, 0.08);
+  border: 1px solid rgba(244, 67, 54, 0.15);
+  border-radius: 12px;
+  color: var(--danger);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-logout-side:hover {
+  background: var(--danger);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
